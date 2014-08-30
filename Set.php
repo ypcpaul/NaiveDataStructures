@@ -135,8 +135,11 @@ class Set implements \Countable, \IteratorAggregate
                 throw new \InvalidArgumentException(self::TYPE_ERROR);
             }
         }
-        if(!$this->isMember($element))
+        if(!$this->isMember($element)) {
             $this->content[] = $element;
+            if(count($this->content === 1))
+                $this->type = gettype($this->content);
+        }
         return $this;
     }
 
