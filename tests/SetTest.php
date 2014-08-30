@@ -19,4 +19,11 @@ class SetTest extends \PHPUnit_Framework_TestCase
         }
         $this->fail('Expected invalid argument exception not thrown');
     }
+
+    public function testCheckType()
+    {
+        $set = new Set("boom", "baam", "preee");
+        $this->assertFalse($set->checkType(0));
+        $this->assertTrue($set->checkType("aaaa"));
+    }
 }

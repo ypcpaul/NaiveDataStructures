@@ -47,7 +47,7 @@ class Set implements \Countable, \IteratorAggregate
     /**
      * Check an element's type if it is equal to the set's accepted type.
      */
-    private function checkType($elem) 
+    public function checkType($elem) 
     {
         if(gettype($elem) !== $this->type)
             return false;
