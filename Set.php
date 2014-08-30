@@ -26,7 +26,8 @@ class Set implements \Countable, \IteratorAggregate
      * set contents; or pass a single array of elements.  Data type of the
      * first element would be used as the set's allowed type.
      */
-    public function __construct() {
+    public function __construct() 
+    {
         if(func_num_args() > 0) {
             $args = func_get_args();
             if(is_array($args[0]) && func_num_args() === 1)
@@ -46,7 +47,8 @@ class Set implements \Countable, \IteratorAggregate
     /**
      * Check an element's type if it is equal to the set's accepted type.
      */
-    private function checkType($elem) {
+    private function checkType($elem) 
+    {
         if(gettype($elem) !== $this->type)
             return false;
         return true;
@@ -56,7 +58,8 @@ class Set implements \Countable, \IteratorAggregate
      * Returns the type of elements this set accepts.
      * @return string
      */
-    public function getType() {
+    public function getType() 
+    {
         return $this->type;
     }
 
@@ -64,7 +67,8 @@ class Set implements \Countable, \IteratorAggregate
      * Count the number of elements of this set.
      * @return integer
      */
-    public function count() {
+    public function count() 
+    {
         return count($this->content);
     }
 
@@ -72,7 +76,8 @@ class Set implements \Countable, \IteratorAggregate
      * Get iterator for this set.  This would allow us to loop through the set
      * @return \ArrayIterator
      */
-    public function getIterator() {
+    public function getIterator() 
+    {
         return new \ArrayIterator($this->content);
     }
 
@@ -80,7 +85,8 @@ class Set implements \Countable, \IteratorAggregate
      * Get contents of this set in array form
      * @return array
      */
-    public function getContent() {
+    public function getContent() 
+    {
         return $this->content;
     }
 
@@ -89,7 +95,8 @@ class Set implements \Countable, \IteratorAggregate
      * @param Set $set
      * @return Set
      */
-    public function union(Set $set) {
+    public function union(Set $set) 
+    {
         return new Set(array_unique(
             array_merge($this->content, $set->getContent()))); 
     }
@@ -99,7 +106,8 @@ class Set implements \Countable, \IteratorAggregate
      * @param Set $set
      * @return Set
      */
-    public function intersection(Set $set) {
+    public function intersection(Set $set) 
+    {
         return new Set(array_intersect($this->content, $set->getContent()));
     }
 
@@ -108,7 +116,8 @@ class Set implements \Countable, \IteratorAggregate
      * @param Set $set
      * @return Set
      */
-    public function difference(Set $set) {
+    public function difference(Set $set) 
+    {
         return new Set(array_diff($this->content, $set->getContent()));
     }
 
@@ -117,7 +126,8 @@ class Set implements \Countable, \IteratorAggregate
      * @param Set $set
      * @return boolean
      */
-    public function isSubsetOf(Set $set) {
+    public function isSubsetOf(Set $set) 
+    {
         if(count(array_diff($this->content, $set->getContent())) === 0)
             return true;
         return false;
@@ -129,7 +139,8 @@ class Set implements \Countable, \IteratorAggregate
      * Would not add duplicate elements.
      * @return Set
      */
-    public function add($element) {
+    public function add($element) 
+    {
         if(count($this->content) > 0) {
             if(!$this->checkType($element)) {
                 throw new \InvalidArgumentException(self::TYPE_ERROR);
@@ -147,7 +158,8 @@ class Set implements \Countable, \IteratorAggregate
      * Remove an element from this set
      * @return Set
      */ 
-    public function remove($element) {
+    public function remove($element) 
+    {
         $index = $this->isMember($element, true);
         if(is_int($index))
             array_splice($this->content, $index, 1);
@@ -160,7 +172,8 @@ class Set implements \Countable, \IteratorAggregate
      * container.
      * @return boolean | integer
      */
-    public function isMember($element, $returnIndex = false) {
+    public function isMember($element, $returnIndex = false) 
+    {
         $index = array_search($element, $this->content);
         if(is_int($index)) 
             return $returnIndex ? $index : true;
