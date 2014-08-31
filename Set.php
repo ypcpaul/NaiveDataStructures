@@ -97,8 +97,13 @@ class Set implements \Countable, \IteratorAggregate
      */
     public function union(Set $set) 
     {
-        return new Set(array_unique(
-            array_merge($this->content, $set->getContent()))); 
+        return new Set(
+            array_values(
+                array_unique(
+                    array_merge($this->content, $set->getContent())
+                )
+            )
+        ); 
     }
 
     /**
